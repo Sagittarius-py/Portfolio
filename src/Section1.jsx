@@ -1,0 +1,47 @@
+import bgimage from "./Rock-052.jpg";
+import photo from "./photo.jpeg";
+import circles from "./circles.png";
+import Svgcircles from "./Svgcircles";
+
+const Section1 = () => {
+	return (
+		<div className="relative">
+			<div className="absolute w-[200px] h-[1px] border-t-2 border-accent1 z-20 rotate-90 top-32 left-32" />
+			<img
+				src={bgimage}
+				alt="bg"
+				className="w-full h-screen filter contrast-150 saturate-75 absolute"
+			/>
+			<div className="w-full h-screen bg-first absolute bg-opacity-90 relative ">
+				<div className="w-3/6 h-full absolute -right-24 rounded-bl-full bg-accent1 " />
+				{/* <div className="w-1/4 h-4/6 absolute right-0 top-24 rounded-bl-full bg-accent1" /> */}
+				<img
+					src={photo}
+					alt="circles"
+					className="w-5/12 h-full absolute right-0 rounded-bl-full object-cover object-top"
+				/>
+				<div className="flex flex-nowrap absolute left-44 bottom-44 scale-125">
+					<div className="flex flex-col items-end">
+						<h1 className="text-white text-9xl font-thin underline decoration-4 decoration-accent1 underline-offset-8">
+							Filip
+						</h1>
+						<h3 className="text-text text-4xl mt-6">Web</h3>
+					</div>
+					<div className=" h-64 mx-4 -mt-24">
+						<Svgcircles />
+					</div>
+					{/* <img src={circles} alt="circles" className=" h-64 mx-4" /> */}
+					<div className="flex flex-col items-start">
+						<h1 className="text-white text-9xl font-thin underline decoration-4 decoration-accent1 underline-offset-8">
+							Sieniawski
+						</h1>
+						<h3 className="text-text text-4xl mt-6">Developer</h3>
+					</div>
+				</div>
+			</div>
+			<div className="absolute w-[200px] h-[1px] border-t-2 border-accent1 z-20 rotate-90 bottom-32 right-32" />
+		</div>
+	);
+};
+
+export default Section1;
