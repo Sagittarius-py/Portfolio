@@ -14,7 +14,9 @@ function App() {
 					Phone: +48 577 371 102 | Email: filip.sieniawski3@gmail.com | Linked:{" "}
 					<a href="https://www.linkedin.com/in/filip-sieniawski3/">
 						filip-sieniawski3
-					</a>
+					</a>{" "}
+					| GitHub:{" "}
+					<a href="https://github.com/Sagittarius-py">Sagittarius-py</a>
 				</p>
 			</footer>
 		</div>
