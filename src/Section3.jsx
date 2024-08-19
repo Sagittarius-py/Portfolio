@@ -45,7 +45,7 @@ const Section3 = () => {
 			name: "Electrician Tool",
 			tech: "PHP Laravel",
 			image: img3,
-			link: "https://github.com/Sagittarius-py/Portfolio-Three",
+			link: "https://github.com/Sagittarius-py/Neutron-0",
 			xoffset: 0,
 			active: false,
 		},
