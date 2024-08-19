@@ -39,7 +39,7 @@ const Section2 = () => {
 		<div className="relative h-screen w-screen bg-first flex justify-center overflow-hidden shadow-2xl shadow-zinc-900">
 			<div className="absolute w-[200px] h-[1px] border-t-2 border-accent1 z-30 rotate-90 top-32 left-32" />
 
-			<div className="flex w-10/12 justify-center">
+			<div className="flex w-8/12 justify-center">
 				<div className="flex flex-col items-end justify-around  w-2/3 h-5/6 bg-secc z-20 mt-20 py-10">
 					<h1 className="top-20 text-white text-5xl z-30 p-2 w-full flex justify-center mb-10">
 						Education
@@ -70,7 +70,7 @@ const Section2 = () => {
 					{expirience.map((elem) => {
 						return (
 							<div className="flex w-3/4">
-								<div className=" h-48 border-t-4 border-accent1 border-dashed flex flex-col mt-4">
+								<div className="w-96 h-48 border-t-4 border-accent1 border-dashed flex flex-col mt-4">
 									<h1 className="text-white text-4xl font-light text-end pr-2">
 										{elem.name}
 									</h1>

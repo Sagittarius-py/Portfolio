@@ -5,9 +5,10 @@ import "./projects_gallery.css";
 
 import "react-alice-carousel/lib/alice-carousel.css";
 
-import img1 from "./2.jpg";
-import img2 from "./2.jpg";
-import img3 from "./2.jpg";
+import img1 from "./Social.png";
+import img2 from "./Shop.png";
+import img3 from "./Proton.png";
+import img4 from "./Framework.png";
 
 import { motion } from "framer-motion";
 
@@ -23,42 +24,39 @@ const Section3 = () => {
 	const projects = [
 		{
 			id: 1,
-			name: "First Portfolio",
-			image: img1,
-			link: "https://github.com/Sagittarius-py/Portfolio-One",
-			active: true,
+			name: "JS-JSX Framework",
+			tech: "JavaScript",
+			image: img4,
+			link: "https://github.com/Sagittarius-py/MiniFramework",
+			xoffset: 0,
+			active: false,
 		},
 		{
 			id: 2,
-			name: "Second Portfolio",
+			name: "Web Shop",
+			tech: "React | Next.js",
 			image: img2,
-			link: "https://github.com/Sagittarius-py/Portfolio-Two",
+			link: "https://github.com/Sagittarius-py/Sagittarius-Shop-React.ts-Express",
+			xoffset: 20,
 			active: false,
 		},
 		{
 			id: 3,
-			name: "Third Portfolio",
+			name: "Electrician Tool",
+			tech: "PHP Laravel",
 			image: img3,
 			link: "https://github.com/Sagittarius-py/Portfolio-Three",
+			xoffset: 0,
 			active: false,
 		},
 		{
 			id: 4,
-			name: "fourth",
-			link: "http://...",
-			active: false,
-		},
-		{
-			id: 5,
-			name: "fivth",
-			link: "http://...",
-			active: false,
-		},
-		{
-			id: 6,
-			name: "sixth",
-			link: "http://...",
-			active: false,
+			name: "Instagram Clone",
+			tech: "React | Next.js",
+			image: img1,
+			link: "https://github.com/Sagittarius-py/Social-blog-React-Express",
+			xoffset: 20,
+			active: true,
 		},
 	];
 
@@ -67,44 +65,50 @@ const Section3 = () => {
 	};
 
 	return (
-		<div className="w-screen bg-first h-screen flex justify-center items-center relative bg-opacity-50">
+		<div>
 			<img
 				src={bgimage}
 				alt="bg"
-				className="w-screen h-screen filter contrast-150 saturate-75 absolute shadow-2xl shadow-zinc-900 object-cover -z-10"
+				className="w-screen h-screen filter contrast-150 saturate-75 absolute shadow-2xl shadow-zinc-900 object-cover "
 			/>
-			<div className="border-r-4 border-accent1 h-full flex-nowrap absolute " />
-			<div className="project-carousel">
-				<motion.div
-					ref={carousel}
-					className="carousel"
-					whileTap={{ cursor: "grabbing" }}
-				>
+			<div className="w-screen bg-first h-screen flex justify-center items-center relative bg-opacity-50">
+				<div className="border-r-4 border-accent1 h-full flex-nowrap absolute " />
+				<div className="project-carousel ">
 					<motion.div
-						drag="x"
-						dragConstraints={{ right: 0, left: -width }}
-						className="inner-carousel"
+						ref={carousel}
+						className="carousel"
+						whileTap={{ cursor: "grabbing" }}
 					>
-						{projects.map((project) => {
-							return (
-								<motion.div
-									style={{ backgroundImage: `url(${project.image})` }}
-									className="item"
-									key={project.id}
-								>
-									<div className="item-content">
-										<p
-											className="name"
-											onClick={() => openInNewTab(project.link)}
-										>
-											{project.name}
-										</p>
-									</div>
-								</motion.div>
-							);
-						})}
+						<motion.div
+							drag="x"
+							dragConstraints={{ right: 0, left: -width }}
+							className="inner-carousel"
+						>
+							{projects.map((project) => {
+								return (
+									<motion.div
+										style={{
+											backgroundImage: `url(${project.image})`,
+											backgroundPosition: `${project?.xoffset}%`,
+										}}
+										className="item bg-left -my-1"
+										key={project.id}
+									>
+										<div className="item-content flex flex-col">
+											<h1
+												className="name"
+												onClick={() => openInNewTab(project.link)}
+											>
+												{project.name}
+											</h1>
+											<p className="text-white">{project.tech}</p>
+										</div>
+									</motion.div>
+								);
+							})}
+						</motion.div>
 					</motion.div>
-				</motion.div>
+				</div>
 			</div>
 		</div>
 	);
