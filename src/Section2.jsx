@@ -20,17 +20,17 @@ const Section2 = () => {
 	const expirience = [
 		{
 			name: "Wakmet Sp. z. o. o.",
-			tasks: ["Technician of Information Technology"],
+			degree: ["Junior Plant System Management Technician"],
 			year: "2018",
 		},
 		{
 			name: "PP Malta Group",
-			degree: ["Web Systems Engineer"],
+			degree: ["Junior Web Development Specialist"],
 			year: "2022",
 		},
 		{
 			name: "Głuchołazy City Hall",
-			degree: ["Bachelor of Engineering"],
+			degree: ["Web Application Developer"],
 			year: "2024",
 		},
 	];
