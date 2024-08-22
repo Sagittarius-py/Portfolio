@@ -46,7 +46,7 @@ const Section2 = () => {
 					</h1>
 					{education.map((elem) => {
 						return (
-							<div className="flex w-3/4">
+							<div className="flex w-full">
 								<p className="text-white text-2xl px-2 font-thin">
 									{elem.year}
 								</p>
@@ -69,7 +69,7 @@ const Section2 = () => {
 					</h1>
 					{expirience.map((elem) => {
 						return (
-							<div className="flex w-3/4">
+							<div className="flex w-full">
 								<div className="w-96 h-48 border-t-4 border-accent1 border-dashed flex flex-col mt-4 ">
 									<h1 className="text-white text-4xl font-light text-end pr-2">
 										{elem.name}
