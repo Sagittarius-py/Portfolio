@@ -1,6 +1,7 @@
 import Section1 from "./Section1";
 import Section2 from "./Section2";
 import Section3 from "./Section3";
+import Section4 from "./Section4";
 
 function App() {
 	return (
@@ -8,6 +9,7 @@ function App() {
 			<Section1 />
 			<Section2 />
 			<Section3 />
+			<Section4 />
 			<footer className="w-full h-48 flex flex-col justify-center items-center">
 				<h4 className="lg:text-3xl text-white">@ Filip Sieniawski</h4>
 				<p className="lg:text-xl text-text">

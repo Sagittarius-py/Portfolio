@@ -18,6 +18,7 @@ module.exports = {
 			text: "#AAA8AD",
 			accent1: "#FF4F00",
 			accent2: "#EF6817",
+			accent3: "#00B0FF",
 		},
 		extend: {},
 	},

@@ -95,7 +95,7 @@ const Section2 = () => {
 
 				return (
 					<div
-						className={`absolute w-[200px] h-[1px] border-t-2 border-text ${
+						className={`absolute w-[200px] h-[1px] border-t-2 border-accent3 ${
 							x_or_y ? "rotate-90" : null
 						} z-10`}
 						style={{ left: `${x_coord}px`, top: `${y_coord}px` }}
