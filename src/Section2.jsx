@@ -19,7 +19,7 @@ const Section2 = () => {
 
 	const expirience = [
 		{
-			name: "Wakmet Sp. z. o. o.",
+			name: "Wakmet Sp. z.o.o.",
 			degree: ["Junior Plant System Management Technician"],
 			year: "2018",
 		},
