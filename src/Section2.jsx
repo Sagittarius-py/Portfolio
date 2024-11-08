@@ -88,20 +88,6 @@ const Section2 = () => {
 			</div>
 
 			<div className="absolute w-[200px] h-[1px] border-t-2 border-accent1 z-20 rotate-90 bottom-32 right-32 opacity-0 lg:opacity-100" />
-			{[...Array(100)].map((x, i) => {
-				let x_coord = Math.floor(Math.random() * 1920) - 100;
-				let y_coord = Math.floor(Math.random() * 800) + 50;
-				let x_or_y = Math.floor(Math.random() * 2);
-
-				return (
-					<div
-						className={`absolute w-[200px] h-[1px] border-t-2 border-accent3 ${
-							x_or_y ? "rotate-90" : null
-						} z-10`}
-						style={{ left: `${x_coord}px`, top: `${y_coord}px` }}
-					/>
-				);
-			})}
 		</div>
 	);
 };

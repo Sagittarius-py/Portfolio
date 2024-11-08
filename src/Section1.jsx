@@ -6,7 +6,6 @@ import Svgcircles from "./Svgcircles";
 const Section1 = () => {
 	return (
 		<div className="relative ">
-			<div className="absolute w-[200px] h-[1px] border-t-2 border-accent3 z-20 rotate-90 top-32 left-32 hidden lg:block" />
 			<img
 				src={bgimage}
 				alt="bg"
@@ -37,7 +36,6 @@ const Section1 = () => {
 					</div>
 				</div>
 			</div>
-			<div className="absolute w-[200px] h-[1px] border-t-2 border-accent3 z-20 rotate-90 bottom-32 right-32 hidden lg:block" />
 		</div>
 	);
 };

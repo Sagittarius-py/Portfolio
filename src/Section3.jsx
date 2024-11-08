@@ -69,9 +69,9 @@ const Section3 = () => {
 			<img
 				src={bgimage}
 				alt="bg"
-				className="w-screen h-screen filter contrast-150 saturate-75 absolute shadow-2xl shadow-zinc-900 object-cover "
+				className="h-screen filter contrast-150 saturate-75 absolute shadow-2xl shadow-zinc-900 object-cover "
 			/>
-			<div className="w-screen bg-first h-screen flex justify-center items-center relative bg-opacity-50">
+			<div className="h-screen flex justify-center items-center relative bg-opacity-50">
 				<div className="border-r-4 border-accent1 h-full flex-nowrap absolute " />
 				<div className="project-carousel ">
 					<motion.div
