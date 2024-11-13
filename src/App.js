@@ -10,7 +10,7 @@ function App() {
 			<Section2 />
 			<Section3 />
 			<Section4 />
-			<footer className="w-full h-48 flex flex-col justify-center items-center">
+			<footer className="w-full h-48 flex flex-col justify-center items-center bg-zinc ">
 				<h4 className="lg:text-3xl text-white">@ Filip Sieniawski</h4>
 				<p className="lg:text-xl text-text">
 					Phone: +48 577 371 102 | Email: filip.sieniawski3@gmail.com | Linked:{" "}

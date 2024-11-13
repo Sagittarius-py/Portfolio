@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const Section2 = () => {
 	const education = [
 		{
@@ -17,7 +19,7 @@ const Section2 = () => {
 		},
 	];
 
-	const expirience = [
+	const experience = [
 		{
 			name: "Wakmet Sp. z.o.o.",
 			degree: ["Junior Plant System Management Technician"],
@@ -30,64 +32,60 @@ const Section2 = () => {
 		},
 		{
 			name: "Głuchołazy City Hall",
-			degree: ["Web Application Developer"],
+			degree: ["Junior Web Application Development Engineer"],
 			year: "2024",
 		},
 	];
 
-	return (
-		<div className="relative flex flex-col lg:flex-row w-screen bg-first flex justify-center overflow-hidden shadow-2xl shadow-zinc-900">
-			<div className="absolute w-[200px] h-[1px] border-t-2 border-accent1 z-30 rotate-90 top-32 left-32 opacity-0 lg:opacity-100" />
+	// Framer motion animation variants
+	const fadeInUp = {
+		hidden: { opacity: 0, y: 20 },
+		visible: { opacity: 1, y: -10, transition: { duration: 1.5 } },
+	};
 
-			<div className="flex flex-col lg:flex-row w-8/12 justify-center">
-				<div className="flex flex-col items-end justify-around w-screen lg:w-2/3 h-5/6 bg-secc z-20 mt-20 py-10">
-					<h1 className="top-20 text-white text-5xl z-30 p-2 w-full flex justify-center mb-10">
-						Education
-					</h1>
-					{education.map((elem) => {
-						return (
-							<div className="flex w-4/5">
-								<p className="text-white text-2xl px-2 font-thin">
-									{elem.year}
-								</p>
-								<div className=" h-48 border-t-4 border-accent1 border-dashed flex flex-col mt-4">
-									<h1 className="text-white text-4xl font-light text-end pr-2">
-										{elem.name}
-									</h1>
-									<h2 className="text-text text-2xl font-thin text-end pr-2">
-										{elem.degree}
-									</h2>
-								</div>
-							</div>
-						);
-					})}
-				</div>
-				<div className="border-r-4 border-accent1 z-30 h-full absolute" />
-				<div className="flex flex-col items-start  justify-around w-screen lg:w-2/3 h-5/6 bg-third  z-20 mt-20 py-10 flex">
-					<h1 className="top-20 text-white text-5xl z-30 p-2 w-full flex justify-center mb-10">
-						Expirience
-					</h1>
-					{expirience.map((elem) => {
-						return (
-							<div className="flex w-full">
-								<div className="w-96 h-48 border-t-4 border-accent1 border-dashed flex flex-col mt-4 ">
-									<h1 className="text-white text-4xl font-light text-end pr-2">
-										{elem.name}
-									</h1>
-									<h2 className="text-text  text-2xl font-thin text-end pr-2">
-										{elem.degree}
-									</h2>
-								</div>
-								<p className="text-white text-2xl px-2 font-thin">
-									{elem.year}
-								</p>
-							</div>
-						);
-					})}
-				</div>
+	return (
+		<div className="relative flex flex-col lg:flex-row w-full bg-first justify-center overflow-hidden shadow-2xl shadow-zinc-900 p-6">
+			{/* Education Section */}
+			<div className="flex flex-col items-center w-full lg:w-1/2 bg-secc p-6 lg:p-10 space-y-8">
+				<h1 className="text-white text-5xl font-semibold mb-4">Education</h1>
+				{education.map((elem, index) => (
+					<motion.div
+						key={index}
+						className="w-full flex flex-col lg:flex-row lg:items-center space-y-2 lg:space-y-0 lg:space-x-4"
+						variants={fadeInUp}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true }}
+					>
+						<p className="text-white text-2xl font-light">{elem.year}</p>
+						<div className="w-full lg:w-auto border-t-2 border-accent1 border-dashed flex flex-col lg:ml-4 pt-4">
+							<h2 className="text-white text-3xl font-medium">{elem.name}</h2>
+							<p className="text-text text-xl font-light">{elem.degree}</p>
+						</div>
+					</motion.div>
+				))}
 			</div>
 
-			<div className="absolute w-[200px] h-[1px] border-t-2 border-accent1 z-20 rotate-90 bottom-32 right-32 opacity-0 lg:opacity-100" />
+			{/* Experience Section */}
+			<div className="flex flex-col items-center w-full lg:w-1/2 bg-third p-6 lg:p-10 space-y-8 mt-10 lg:mt-0">
+				<h1 className="text-white text-5xl font-semibold mb-4">Experience</h1>
+				{experience.map((elem, index) => (
+					<motion.div
+						key={index}
+						className="w-full flex flex-col lg:flex-row lg:items-center space-y-2 lg:space-y-0 lg:space-x-4"
+						variants={fadeInUp}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true }}
+					>
+						<p className="text-white text-2xl font-light">{elem.year}</p>
+						<div className="w-full lg:w-auto border-t-2 border-accent1 border-dashed flex flex-col lg:mr-4 pt-4">
+							<h2 className="text-white text-3xl font-medium">{elem.name}</h2>
+							<p className="text-text text-xl font-light">{elem.degree}</p>
+						</div>
+					</motion.div>
+				))}
+			</div>
 		</div>
 	);
 };

@@ -65,11 +65,11 @@ const Section3 = () => {
 	};
 
 	return (
-		<div>
+		<div className="overflow-hidden relative">
 			<img
 				src={bgimage}
 				alt="bg"
-				className="h-screen filter contrast-150 saturate-75 absolute shadow-2xl shadow-zinc-900 object-cover "
+				className="w-full h-full filter contrast-150 saturate-75 absolute shadow-2xl shadow-zinc-900  object-cover"
 			/>
 			<div className="h-screen flex justify-center items-center relative bg-opacity-50">
 				<div className="border-r-4 border-accent1 h-full flex-nowrap absolute " />

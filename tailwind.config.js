@@ -19,7 +19,9 @@ module.exports = {
 			accent1: "#FF4F00",
 			accent2: "#EF6817",
 			accent3: "#00B0FF",
+			zinc: "#18181b",
 		},
+
 		extend: {},
 	},
 	plugins: [],
