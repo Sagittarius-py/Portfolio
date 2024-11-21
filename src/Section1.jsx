@@ -14,54 +14,45 @@ const Section1 = () => {
 
 	// Function to generate random bubbles
 	const generateBubbles = () => {
-		return Array.from({ length: 12 }, (_, index) => ({
-			id: index,
-			size: `w-${Math.floor(Math.random() * 3 + 2) * 8} h-${
-				Math.floor(Math.random() * 3 + 2) * 8
-			}`, // Random sizes: 16-48px
-			color: [`bg-accent1`, `bg-accent2`, `bg-accent3`][
-				Math.floor(Math.random() * 3)
-			],
-			delay: Math.random() * 2,
-			initialPosition: {
-				top: `${Math.random() * 100}%`,
-				left: `${Math.random() * 100}%`,
-			},
-		}));
+		return Array.from({ length: 20 }, (_, index) => {
+			let random = Math.floor(Math.random() * 3 + 2) * 8;
+			return {
+				id: index,
+				size: `w-${random} h-${random}`, // Random sizes: 16-48px
+				color: [`bg-accent1`, `bg-accent2`][Math.floor(Math.random() * 3)],
+				delay: Math.random() * 2,
+				initialPosition: {
+					top: `${Math.random() * 100}%`,
+					left: `${Math.random() * 100}%`,
+				},
+			};
+		});
 	};
 
 	// Memoize bubbles to prevent unnecessary re-renders
-	const bubbles = useMemo(() => generateBubbles(), []);
+	const bubbles = generateBubbles();
 
-	// Bubble animation variants with random movement
 	// Bubble animation variants with random movement
 	const bubbleVariants = {
 		initial: {
 			opacity: 0,
-			scale: 0.5,
-			filter: "blur(10px)",
+			scale: 0.3,
+			filter: "blur(30px)",
 			x: "-50%",
 			y: "-50%",
 		},
 		animate: (custom) => ({
 			opacity: [0, 0.4, 0], // Pulsing opacity
-			scale: [0.5, 1, 0.5], // Pulsing scale
+			scale: [0.3, 0.8, 0.3], // Pulsing scale
 			x: ["-50%", `${Math.random() * 100 - 50}%`, "-50%"],
 			y: ["-50%", `${Math.random() * 100 - 50}%`, "-50%"],
-			filter: ["blur(5px)", "blur(50px)", "blur(5px)"],
+			filter: ["blur(10px)", "blur(20px)", "blur(10px)"],
 			transition: {
 				delay: custom.delay,
 				duration: 5,
 				repeat: Infinity,
 				repeatType: "loop",
 				ease: "easeInOut",
-				onRepeat: () => {
-					// Trigger a rerender with new random values
-					custom.initialPosition = {
-						top: `${Math.random() * 100}%`,
-						left: `${Math.random() * 100}%`,
-					};
-				},
 			},
 		}),
 	};
@@ -161,13 +152,13 @@ const Section1 = () => {
 							{
 								icon: Layers,
 								label: "Full-Stack",
-								color: "text-accent2",
+								color: "text-white",
 								index: 1,
 							},
 							{
 								icon: Rocket,
 								label: "Innovation",
-								color: "text-accent3",
+								color: "text-accent2",
 								index: 2,
 							},
 						].map(({ icon: Icon, label, color, index }) => (
