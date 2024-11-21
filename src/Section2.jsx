@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { GraduationCap, Briefcase } from "lucide-react";
 
 const Section2 = () => {
 	const education = [
@@ -22,17 +23,17 @@ const Section2 = () => {
 	const experience = [
 		{
 			name: "Wakmet Sp. z.o.o.",
-			degree: ["Junior Plant System Management Technician"],
+			degree: "Junior Plant System Management Technician",
 			year: "2018",
 		},
 		{
 			name: "PP Malta Group",
-			degree: ["Junior Web Development Specialist"],
+			degree: "Junior Web Development Specialist",
 			year: "2022",
 		},
 		{
 			name: "Głuchołazy City Hall",
-			degree: ["Junior Web Application Development Engineer"],
+			degree: "Junior Web Application Development Engineer",
 			year: "2024",
 		},
 	];
@@ -40,52 +41,62 @@ const Section2 = () => {
 	// Framer motion animation variants
 	const fadeInUp = {
 		hidden: { opacity: 0, y: 20 },
-		visible: { opacity: 1, y: -10, transition: { duration: 1.5 } },
+		visible: {
+			opacity: 1,
+			y: 0,
+			transition: { duration: 0.6, ease: "easeOut" },
+		},
 	};
 
-	return (
-		<div className="relative flex flex-col lg:flex-row w-full bg-first justify-center overflow-hidden shadow-2xl shadow-zinc-900 p-6">
-			{/* Education Section */}
-			<div className="flex flex-col items-center w-full lg:w-1/2 bg-secc p-6 lg:p-10 space-y-8">
-				<h1 className="text-white text-5xl font-semibold mb-4">Education</h1>
-				{education.map((elem, index) => (
+	const SectionCard = ({ title, items, icon: Icon, bgColor }) => (
+		<div className={`w-full lg:w-1/2 ${bgColor} p-8 rounded-xl`}>
+			<div className="flex items-center mb-8 space-x-4">
+				<Icon className="w-12 h-12 text-accent1" />
+				<h1 className="text-white text-4xl font-thin">{title}</h1>
+			</div>
+			<div className="space-y-6">
+				{items.map((elem, index) => (
 					<motion.div
 						key={index}
-						className="w-full flex flex-col lg:flex-row lg:items-center space-y-2 lg:space-y-0 lg:space-x-4"
+						className="group"
 						variants={fadeInUp}
 						initial="hidden"
 						whileInView="visible"
 						viewport={{ once: true }}
 					>
-						<p className="text-white text-2xl font-light">{elem.year}</p>
-						<div className="w-full lg:w-auto border-t-2 border-accent1 border-dashed flex flex-col lg:ml-4 pt-4">
-							<h2 className="text-white text-3xl font-medium">{elem.name}</h2>
-							<p className="text-text text-xl font-light">{elem.degree}</p>
+						<div className="flex items-center space-x-4">
+							<div className="w-16 flex-shrink-0">
+								<p className="text-white text-xl font-light opacity-70 group-hover:opacity-100 transition-opacity">
+									{elem.year}
+								</p>
+							</div>
+							<div className="flex-grow border-t-2 border-accent1 border-dashed pl-4 pt-4">
+								<h2 className="text-white text-2xl font-medium group-hover:text-accent1 transition-colors">
+									{elem.name}
+								</h2>
+								<p className="text-text text-lg font-light">{elem.degree}</p>
+							</div>
 						</div>
 					</motion.div>
 				))}
 			</div>
+		</div>
+	);
 
-			{/* Experience Section */}
-			<div className="flex flex-col items-center w-full lg:w-1/2 bg-third p-6 lg:p-10 space-y-8 mt-10 lg:mt-0">
-				<h1 className="text-white text-5xl font-semibold mb-4">Experience</h1>
-				{experience.map((elem, index) => (
-					<motion.div
-						key={index}
-						className="w-full flex flex-col lg:flex-row lg:items-center space-y-2 lg:space-y-0 lg:space-x-4"
-						variants={fadeInUp}
-						initial="hidden"
-						whileInView="visible"
-						viewport={{ once: true }}
-					>
-						<p className="text-white text-2xl font-light">{elem.year}</p>
-						<div className="w-full lg:w-auto border-t-2 border-accent1 border-dashed flex flex-col lg:mr-4 pt-4">
-							<h2 className="text-white text-3xl font-medium">{elem.name}</h2>
-							<p className="text-text text-xl font-light">{elem.degree}</p>
-						</div>
-					</motion.div>
-				))}
-			</div>
+	return (
+		<div className="relative flex flex-col lg:flex-row w-full bg-first justify-center overflow-hidden p-4 lg:p-8 gap-8">
+			<SectionCard
+				title="Education"
+				items={education}
+				icon={GraduationCap}
+				bgColor="bg-secc"
+			/>
+			<SectionCard
+				title="Experience"
+				items={experience}
+				icon={Briefcase}
+				bgColor="bg-third"
+			/>
 		</div>
 	);
 };

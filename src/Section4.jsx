@@ -12,6 +12,14 @@ import {
 import { motion } from "framer-motion";
 
 const Section4 = () => {
+	// Function to convert percentage to skill level
+	const getSkillLevel = (percent) => {
+		if (percent >= 85) return "Expert";
+		if (percent >= 70) return "Advanced";
+		if (percent >= 50) return "Intermediate";
+		return "Beginner";
+	};
+
 	const items = [
 		{
 			title: "Front-End",
@@ -25,14 +33,14 @@ const Section4 = () => {
 				},
 				{
 					name: "JavaScript / TypeScript",
-					percent: 90,
+					percent: 85,
 					description:
 						"Proficient in ES6+ syntax, TypeScript typing, and asynchronous patterns.",
 					icon: <FaJs />,
 				},
 				{
 					name: "React.js / React Native",
-					percent: 85,
+					percent: 80,
 					description:
 						"React hooks, component lifecycle, and mobile-focused development.",
 					icon: <FaReact />,
@@ -51,14 +59,14 @@ const Section4 = () => {
 				},
 				{
 					name: "Next.js",
-					percent: 70,
+					percent: 50,
 					description:
 						"Server-side rendering and API routes for full-stack React applications.",
 					icon: <SiNextdotjs />,
 				},
 				{
-					name: "PHP + Laravel",
-					percent: 50,
+					name: "PHP / Laravel",
+					percent: 40,
 					description:
 						"Efficient with MVC patterns and dynamic content handling with Laravel.",
 					icon: <SiPhp />,
@@ -73,19 +81,19 @@ const Section4 = () => {
 			content: [
 				{
 					name: "Python",
-					percent: 70,
+					percent: 60,
 					description: "Scripting and backend development.",
 					icon: <FaPython />,
 				},
 				{
 					name: "Java",
-					percent: 50,
+					percent: 40,
 					description: "Object-oriented programming.",
 					icon: <FaJava />,
 				},
 				{
 					name: "C / C++",
-					percent: 50,
+					percent: 30,
 					description: "Memory management and system-level programming.",
 					icon: <SiCplusplus />,
 				},
@@ -142,20 +150,24 @@ const Section4 = () => {
 										{skill.icon}
 									</div>
 									<div className="flex-1">
-										<h3 className="text-lg text-white font-semibold">
-											{skill.name}
-										</h3>
-										<p className="text-sm  text-white">{skill.description}</p>
-										<div className="relative w-full h-4 mt-2 bg-secc rounded-full overflow-hidden flex items-center">
+										<div className="flex justify-between items-center">
+											<h3 className="text-lg text-white font-semibold">
+												{skill.name}
+											</h3>
+											<span className="text-sm text-accent1">
+												{getSkillLevel(skill.percent)}
+											</span>
+										</div>
+										<p className="text-sm text-white mb-2">
+											{skill.description}
+										</p>
+										<div className="relative w-full h-2 bg-secc rounded-full overflow-hidden">
 											<motion.div
 												className="absolute h-full bg-accent2"
 												initial={{ width: 0 }}
 												animate={{ width: `${skill.percent}%` }}
 												transition={{ duration: 1 }}
 											></motion.div>
-											<span className="absolute right-2 text-sm text-white">
-												{skill.percent}%
-											</span>
 										</div>
 									</div>
 								</div>

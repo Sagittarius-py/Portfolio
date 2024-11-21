@@ -1,90 +1,195 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import bgimage from "./1.jpg";
-import photo from "./photo.jpeg";
-import Svgcircles from "./Svgcircles";
+import React, { useMemo } from "react";
+import {
+	motion,
+	useScroll,
+	useTransform,
+	AnimatePresence,
+} from "framer-motion";
+import { Code, Layers, Rocket } from "lucide-react";
 
 const Section1 = () => {
-	// Parallax effect for background image
+	// Parallax effect for the background
 	const { scrollY } = useScroll();
-	const yTransform = useTransform(scrollY, [0, 300], [0, 100]);
+	const bgY = useTransform(scrollY, [0, 500], ["0%", "20%"]);
+
+	// Function to generate random bubbles
+	const generateBubbles = () => {
+		return Array.from({ length: 12 }, (_, index) => ({
+			id: index,
+			size: `w-${Math.floor(Math.random() * 3 + 2) * 8} h-${
+				Math.floor(Math.random() * 3 + 2) * 8
+			}`, // Random sizes: 16-48px
+			color: [`bg-accent1`, `bg-accent2`, `bg-accent3`][
+				Math.floor(Math.random() * 3)
+			],
+			delay: Math.random() * 2,
+			initialPosition: {
+				top: `${Math.random() * 100}%`,
+				left: `${Math.random() * 100}%`,
+			},
+		}));
+	};
+
+	// Memoize bubbles to prevent unnecessary re-renders
+	const bubbles = useMemo(() => generateBubbles(), []);
+
+	// Bubble animation variants with random movement
+	// Bubble animation variants with random movement
+	const bubbleVariants = {
+		initial: {
+			opacity: 0,
+			scale: 0.5,
+			filter: "blur(10px)",
+			x: "-50%",
+			y: "-50%",
+		},
+		animate: (custom) => ({
+			opacity: [0, 0.4, 0], // Pulsing opacity
+			scale: [0.5, 1, 0.5], // Pulsing scale
+			x: ["-50%", `${Math.random() * 100 - 50}%`, "-50%"],
+			y: ["-50%", `${Math.random() * 100 - 50}%`, "-50%"],
+			filter: ["blur(5px)", "blur(50px)", "blur(5px)"],
+			transition: {
+				delay: custom.delay,
+				duration: 5,
+				repeat: Infinity,
+				repeatType: "loop",
+				ease: "easeInOut",
+				onRepeat: () => {
+					// Trigger a rerender with new random values
+					custom.initialPosition = {
+						top: `${Math.random() * 100}%`,
+						left: `${Math.random() * 100}%`,
+					};
+				},
+			},
+		}),
+	};
+
+	// Skill icons and rest of the component remain the same as previous version
+	const skillVariants = {
+		hidden: { opacity: 0, scale: 0.8 },
+		visible: (custom) => ({
+			opacity: 1,
+			scale: 1,
+			transition: {
+				delay: custom * 0.2,
+				type: "spring",
+				stiffness: 300,
+				damping: 10,
+			},
+		}),
+		hover: {
+			scale: 1.1,
+			rotate: [0, 10, -10, 0],
+			transition: {
+				type: "spring",
+				stiffness: 300,
+			},
+		},
+	};
 
 	return (
-		<div className="relative overflow-hidden">
-			{/* Background Image with Parallax Effect */}
-			<motion.img
-				src={bgimage}
-				alt="bg"
-				className="w-full h-screen filter contrast-150 saturate-75 absolute shadow-2xl shadow-zinc-900"
-				style={{ y: yTransform }}
-			/>
-
-			{/* Overlay and Profile Section */}
-			<div className="w-full h-screen bg-first absolute bg-opacity-90 relative flex items-center justify-center">
-				{/* Accent Shape */}
-				<div className="sm:w-3/6 sm:h-full absolute -right-24 rounded-bl-full bg-accent1 shadow-2xl shadow-zinc-900" />
-
-				{/* Profile Image */}
-				<img
-					src={photo}
-					alt="profile"
-					className="2xl:w-5/12 md:w-7/12 lg:h-full absolute right-0 rounded-bl-full object-cover object-top shadow-2xl shadow-zinc-900"
-				/>
-
-				{/* Text and Animation Container */}
-				<div className="flex flex-col lg:flex-row lg:flex-nowrap absolute lg:left-44 bottom-24 lg:bottom-44 lg:scale-125">
-					{/* First Name with Animation */}
-					<div className="flex flex-col lg:items-end">
-						<motion.h1
-							className="text-white text-8xl xl:text-9xl font-thin underline decoration-4 decoration-accent1 underline-offset-8 hover:brightness-125"
-							initial={{ opacity: 0, y: 50 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: 0.2, duration: 0.8 }}
-						>
-							Filip
-						</motion.h1>
-						<motion.h3
-							className="text-text text-4xl mt-6 hover:text-accent1 transition-colors duration-300"
-							initial={{ opacity: 0, x: -50 }}
-							animate={{ opacity: 1, x: 0 }}
-							transition={{ delay: 0.4, duration: 0.8 }}
-						>
-							Web
-						</motion.h3>
-					</div>
-
-					{/* Animated SVG with Bounce */}
+		<div className="relative overflow-hidden h-screen bg-first">
+			{/* Animated Background Bubbles with Random Movement */}
+			<motion.div
+				className="absolute inset-0 overflow-hidden"
+				style={{ y: bgY }}
+			>
+				{bubbles.map((bubble) => (
 					<motion.div
-						className="lg:h-64 mx-4 -mt-24 hidden lg:block"
-						initial={{ scale: 0.8 }}
-						animate={{ scale: 1 }}
-						transition={{
-							type: "spring",
-							stiffness: 500,
-							damping: 10,
+						key={bubble.id}
+						custom={bubble}
+						variants={bubbleVariants}
+						initial="initial"
+						animate="animate"
+						className={`absolute ${bubble.size} ${bubble.color} rounded-full blur-2xl origin-center`}
+						style={{
+							top: bubble.initialPosition.top,
+							left: bubble.initialPosition.left,
 						}}
-					>
-						<Svgcircles />
-					</motion.div>
+					/>
+				))}
+			</motion.div>
 
-					{/* Last Name with Animation */}
-					<div className="flex flex-col items-start">
-						<motion.h1
-							className="text-white text-8xl xl:text-9xl font-thin underline decoration-4 decoration-accent1 underline-offset-8 hover:brightness-125"
+			{/* Rest of the component (same as previous version) */}
+			<div className="relative z-10 flex items-center justify-center h-full">
+				<div className="text-center max-w-5xl px-4">
+					<AnimatePresence>
+						<motion.div
 							initial={{ opacity: 0, y: 50 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: 0.3, duration: 0.8 }}
+							exit={{ opacity: 0, y: -50 }}
+							transition={{
+								duration: 0.8,
+								type: "spring",
+								stiffness: 100,
+							}}
+							className="mb-12"
 						>
-							Sieniawski
-						</motion.h1>
-						<motion.h3
-							className="text-text text-4xl mt-6 hover:text-accent1 transition-colors duration-300"
-							initial={{ opacity: 0, x: 50 }}
-							animate={{ opacity: 1, x: 0 }}
-							transition={{ delay: 0.5, duration: 0.8 }}
-						>
-							Developer
-						</motion.h3>
-					</div>
+							<motion.h1
+								initial={{ opacity: 0, x: -50 }}
+								animate={{ opacity: 1, x: 0 }}
+								transition={{ delay: 0.2, duration: 0.6 }}
+								className="text-6xl md:text-8xl font-thin text-white tracking-tight"
+							>
+								Filip <span className="text-accent1">Sieniawski</span>
+							</motion.h1>
+							<motion.h2
+								initial={{ opacity: 0, x: 50 }}
+								animate={{ opacity: 1, x: 0 }}
+								transition={{ delay: 0.4, duration: 0.6 }}
+								className="text-2xl md:text-4xl text-text mt-4"
+							>
+								Web Developer | Creative Technologist
+							</motion.h2>
+						</motion.div>
+					</AnimatePresence>
+
+					<motion.div
+						initial="hidden"
+						animate="visible"
+						className="flex justify-center space-x-8 md:space-x-16"
+					>
+						{[
+							{
+								icon: Code,
+								label: "Frontend",
+								color: "text-accent1",
+								index: 0,
+							},
+							{
+								icon: Layers,
+								label: "Full-Stack",
+								color: "text-accent2",
+								index: 1,
+							},
+							{
+								icon: Rocket,
+								label: "Innovation",
+								color: "text-accent3",
+								index: 2,
+							},
+						].map(({ icon: Icon, label, color, index }) => (
+							<motion.div
+								key={label}
+								custom={index}
+								variants={skillVariants}
+								whileHover="hover"
+								className="flex flex-col items-center"
+							>
+								<Icon className={`w-12 h-12 ${color} mb-2`} />
+								<motion.span
+									initial={{ opacity: 0 }}
+									animate={{ opacity: 1 }}
+									transition={{ delay: index * 0.2 + 0.6 }}
+									className="text-text text-lg"
+								>
+									{label}
+								</motion.span>
+							</motion.div>
+						))}
+					</motion.div>
 				</div>
 			</div>
 		</div>
