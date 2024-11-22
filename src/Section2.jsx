@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Briefcase } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 const Section2 = () => {
 	const education = [
@@ -7,11 +8,13 @@ const Section2 = () => {
 			name: "Complex of Schools and Educational Institutions in Nysa",
 			degree: "Technician of Information Technology",
 			year: "2017",
+			link: "https://rolniknysa.pl/",
 		},
 		{
 			name: "University of Applied Sciences In Nysa",
 			degree: "Web Systems Engineer",
 			year: "2021",
+			link: "https://pans.nysa.pl/",
 		},
 		{
 			name: "Degree in Computer Science",
@@ -25,6 +28,7 @@ const Section2 = () => {
 			name: "Wakmet Sp. z.o.o.",
 			degree: "Junior Plant System Management Technician",
 			year: "2018",
+			link: "https://wakmet.com.pl/",
 		},
 		{
 			name: "PP Malta Group",
@@ -32,9 +36,10 @@ const Section2 = () => {
 			year: "2022",
 		},
 		{
-			name: "Głuchołazy City Hall",
+			name: "Głuchołazy City Hall ",
 			degree: "Junior Web Application Development Engineer",
 			year: "2024",
+			link: "https://glucholazy.pl/1189/strona-glowna.html",
 		},
 	];
 
@@ -64,19 +69,26 @@ const Section2 = () => {
 						whileInView="visible"
 						viewport={{ once: true }}
 					>
-						<div className="flex items-center space-x-4">
-							<div className="w-16 flex-shrink-0">
-								<p className="text-white text-xl font-light opacity-70 group-hover:opacity-100 transition-opacity">
-									{elem.year}
-								</p>
+						<a href={elem.link} target={elem.link ? "_blanc" : null}>
+							<div className="flex items-center space-x-4">
+								<div className="w-16 flex-shrink-0">
+									<p className="text-white text-xl font-light opacity-70 group-hover:opacity-100 transition-opacity">
+										{elem.year}
+									</p>
+								</div>
+								<div className="flex-grow border-t-2 border-accent1 border-dashed pl-4 pt-4">
+									<div className="flex ">
+										<h2 className="text-white text-2xl font-medium group-hover:text-accent1 transition-colors">
+											{elem.name}
+										</h2>
+										{elem.link ? (
+											<ExternalLink className="text-white cursor-pointer hover:text-accent1 transition-colors" />
+										) : null}
+									</div>
+									<p className="text-text text-lg font-light">{elem.degree}</p>
+								</div>
 							</div>
-							<div className="flex-grow border-t-2 border-accent1 border-dashed pl-4 pt-4">
-								<h2 className="text-white text-2xl font-medium group-hover:text-accent1 transition-colors">
-									{elem.name}
-								</h2>
-								<p className="text-text text-lg font-light">{elem.degree}</p>
-							</div>
-						</div>
+						</a>
 					</motion.div>
 				))}
 			</div>

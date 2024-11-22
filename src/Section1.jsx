@@ -8,48 +8,43 @@ import {
 import { Code, Layers, Rocket } from "lucide-react";
 
 const Section1 = () => {
-	// Parallax effect for the background
 	const { scrollY } = useScroll();
 	const bgY = useTransform(scrollY, [0, 500], ["0%", "20%"]);
 
-	// Function to generate random bubbles
-	const generateBubbles = () => {
-		return Array.from({ length: 20 }, (_, index) => {
-			let random = Math.floor(Math.random() * 3 + 2) * 8;
-			return {
-				id: index,
-				size: `w-${random} h-${random}`, // Random sizes: 16-48px
-				color: [`bg-accent1`, `bg-accent2`][Math.floor(Math.random() * 3)],
-				delay: Math.random() * 2,
-				initialPosition: {
-					top: `${Math.random() * 100}%`,
-					left: `${Math.random() * 100}%`,
-				},
-			};
-		});
-	};
+	// Generate bubbles with corrected sizing and opacity
+	const generateBubbles = useMemo(() => {
+		return Array.from({ length: 20 }, (_, index) => ({
+			id: index,
+			// Use fixed pixel values instead of Tailwind classes for size
+			size: Math.floor(Math.random() * 100 + 50), // 50-150px
+			// Use rgba values for better control over opacity
+			color:
+				Math.random() > 0.5
+					? "rgba(255, 79, 0, 0.25)"
+					: "rgba(239, 104, 23, 0.25)",
+			delay: Math.random() * 2,
+			initialPosition: {
+				top: `${Math.random() * 100}%`,
+				left: `${Math.random() * 100}%`,
+			},
+		}));
+	}, []);
 
-	// Memoize bubbles to prevent unnecessary re-renders
-	const bubbles = generateBubbles();
-
-	// Bubble animation variants with random movement
 	const bubbleVariants = {
 		initial: {
 			opacity: 0,
 			scale: 0.3,
-			filter: "blur(30px)",
 			x: "-50%",
 			y: "-50%",
 		},
 		animate: (custom) => ({
-			opacity: [0, 0.4, 0], // Pulsing opacity
-			scale: [0.3, 0.8, 0.3], // Pulsing scale
-			x: ["-50%", `${Math.random() * 100 - 50}%`, "-50%"],
-			y: ["-50%", `${Math.random() * 100 - 50}%`, "-50%"],
-			filter: ["blur(10px)", "blur(20px)", "blur(10px)"],
+			opacity: [0.1, 0.3, 0.1], // Increased base opacity
+			scale: [0.8, 1.2, 0.8], // Larger scale range
+			x: ["-50%", `${Math.random() * 40 - 20}%`, "-50%"],
+			y: ["-50%", `${Math.random() * 40 - 20}%`, "-50%"],
 			transition: {
 				delay: custom.delay,
-				duration: 5,
+				duration: 8,
 				repeat: Infinity,
 				repeatType: "loop",
 				ease: "easeInOut",
@@ -57,7 +52,6 @@ const Section1 = () => {
 		}),
 	};
 
-	// Skill icons and rest of the component remain the same as previous version
 	const skillVariants = {
 		hidden: { opacity: 0, scale: 0.8 },
 		visible: (custom) => ({
@@ -82,28 +76,33 @@ const Section1 = () => {
 
 	return (
 		<div className="relative overflow-hidden h-screen bg-first">
-			{/* Animated Background Bubbles with Random Movement */}
+			{/* Background Bubbles */}
 			<motion.div
 				className="absolute inset-0 overflow-hidden"
 				style={{ y: bgY }}
 			>
-				{bubbles.map((bubble) => (
+				{generateBubbles.map((bubble) => (
 					<motion.div
 						key={bubble.id}
 						custom={bubble}
 						variants={bubbleVariants}
 						initial="initial"
 						animate="animate"
-						className={`absolute ${bubble.size} ${bubble.color} rounded-full blur-2xl origin-center`}
 						style={{
+							position: "absolute",
 							top: bubble.initialPosition.top,
 							left: bubble.initialPosition.left,
+							width: bubble.size,
+							height: bubble.size,
+							backgroundColor: bubble.color,
+							borderRadius: "50%",
+							filter: "blur(20px)",
 						}}
 					/>
 				))}
 			</motion.div>
 
-			{/* Rest of the component (same as previous version) */}
+			{/* Content */}
 			<div className="relative z-10 flex items-center justify-center h-full">
 				<div className="text-center max-w-5xl px-4">
 					<AnimatePresence>
