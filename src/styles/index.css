@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "react-alice-carousel/lib/alice-carousel.css";
+
+@media screen and (min-width: 1024px) {
+	body {
+		padding-top: 2%;
+		padding-bottom: 5%;
+		padding-inline: 10%;
+		background-image: url("../imgs/1.jpg");
+		background-attachment: fixed;
+	}
+	#root {
+		box-shadow: 0px 0px 1.6px rgba(0, 0, 0, 0.039),
+			0px 0px 3.6px rgba(0, 0, 0, 0.077), 0px 0px 6.3px rgba(0, 0, 0, 0.114),
+			0px 0px 10px rgba(0, 0, 0, 0.151), 0px 0px 15.5px rgba(0, 0, 0, 0.187),
+			0px 0px 24.1px rgba(0, 0, 0, 0.225), 0px 0px 40px rgba(0, 0, 0, 0.265),
+			0px 0px 80px rgba(0, 0, 0, 0.31);
+	}
+}
